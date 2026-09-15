@@ -27,4 +27,21 @@ print(parkinsons_telemonitoring.metadata)
 print(parkinsons_telemonitoring.variables)
 ```
 
+## Extract features from recordings
+
+The UCI Parkinson's CSV contains precomputed jitter, shimmer, fundamental
+frequency, and HNR values, but it does not include the original audio. MFCCs
+therefore cannot be recovered from that CSV. Use the supplied extractor with
+the voice recordings associated with the observations:
+
+```bash
+python extract_acoustic_features.py path/to/recordings data/acoustic_features.csv
+```
+
+It recursively processes WAV, FLAC, OGG, MP3, M4A, and AIFF files. The output
+contains local jitter and shimmer, HNR in dB, mean/median/standard deviation/
+minimum/maximum F0 in Hz, voiced-frame fraction, and mean and standard
+deviation for 13 MFCC coefficients. Jitter and shimmer are Praat ratios, so a
+value of `0.01` corresponds to 1%.
+
 
